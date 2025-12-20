@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="hero">
+    <h1>Future <span class="highlight">Ready</span></h1>
+    <p>AI-Powered Career & College Recommendations designed for your success.</p>
+    {% if not current_user.is_authenticated %}
+    <div class="d-flex flex-column flex-md-row gap-3">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-neon">Get Started</a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-neon">Login</a>
+    </div>
+    {% else %}
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-neon">Go to Dashboard</a>
+    {% endif %}
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">Top Courses</h2>
+    <div id="courses-list" class="row">
+        <!-- populated by JS -->
+        <div class="text-center text-muted">Loading courses via API...</div>
+    </div>
+
+    <h2 class="text-center mb-4 mt-5 text-secondary">Featured Colleges</h2>
+    <div id="colleges-list" class="row">
+        <!-- populated by JS -->
+        <div class="text-center text-muted">Loading colleges via API...</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const apiKey = 'default-api-key-123'; // In prod, this might be dynamic or public
+
+        // Fetch Courses
+        fetch('/api/courses', {
+            headers: { 'x-api-key': apiKey }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('courses-list');
+                container.innerHTML = '';
+                if (data.length === 0) {
+                    container.innerHTML = '<p class="text-center">No courses available.</p>';
+                    return;
+                }
+                data.forEach(course => {
+                    const html = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 career-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">${course.title}</h5>
+                                <p class="card-text">${course.description.substring(0, 100)}...</p>
+                                <small class="text-muted">Skills: ${course.skills_required}</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                    container.innerHTML += html;
+                });
+            })
+            .catch(err => console.error('Error fetching courses:', err));
+
+        // Fetch Colleges
+        fetch('/api/colleges', {
+            headers: { 'x-api-key': apiKey }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('colleges-list');
+                container.innerHTML = '';
+                if (data.length === 0) {
+                    container.innerHTML = '<p class="text-center">No colleges available.</p>';
+                    return;
+                }
+                data.forEach(college => {
+                    const html = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 career-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-secondary">${college.name}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${college.location}</h6>
+                                <p class="card-text">
+                                    Fees: $${college.fees}<br>
+                                    Cutoff: ${college.cutoff_score}%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                    container.innerHTML += html;
+                });
+            })
+            .catch(err => console.error('Error fetching colleges:', err));
+    });
+</script>
+{% endblock %}

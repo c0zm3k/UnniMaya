@@ -1,0 +1,10 @@
+flask==3.0.0
+flask-sqlalchemy
+flask-login
+scikit-learn
+pandas
+numpy
+werkzeug
+email_validator
+flask-wtf
+flask-bcrypt

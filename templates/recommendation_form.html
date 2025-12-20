@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Complete your Profile for Recommendations</legend>
+            <div class="form-group">
+                {{ form.skills.label(class="form-control-label") }}
+                {{ form.skills(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.interests.label(class="form-control-label") }}
+                {{ form.interests(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.experience.label(class="form-control-label") }}
+                {{ form.experience(class="form-control") }}
+            </div>
+        </fieldset>
+        <div class="form-group mt-3">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

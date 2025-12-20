@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {% if form.name.errors %}
+                {{ form.name(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.location.label(class="form-control-label") }}
+                {% if form.location.errors %}
+                {{ form.location(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.location.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.location(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.affiliates.label(class="form-control-label") }}
+                {% if form.affiliates.errors %}
+                {{ form.affiliates(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.affiliates.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.affiliates(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.cutoff_score.label(class="form-control-label") }}
+                {% if form.cutoff_score.errors %}
+                {{ form.cutoff_score(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.cutoff_score.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.cutoff_score(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.fees.label(class="form-control-label") }}
+                {% if form.fees.errors %}
+                {{ form.fees(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.fees.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.fees(class="form-control") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group mt-3">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

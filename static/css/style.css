@@ -1,0 +1,359 @@
+:root {
+    --bg-color: #0B1120;
+    /* Deep Dark Teal/Slate */
+    --card-bg: #151F32;
+    /* Lighter Slate */
+    --primary-color: #00E5FF;
+    /* Bright Cyan */
+    --secondary-color: #F472B6;
+    /* Soft Pink due to Teal contrast, or keep purple? Let's go with a Vibrant Purple */
+    --secondary-color-dim: #7C3AED;
+    --text-color: #E2E8F0;
+    /* Slate 200 */
+    --text-muted: #94A3B8;
+    /* Slate 400 */
+    --border-radius: 20px;
+    --border-radius-pill: 50px;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Background Gradients to mimic the "Glow" */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05), transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1200px;
+}
+
+/* Navbar - Floating Pill Style */
+.navbar {
+    background: rgba(21, 31, 50, 0.8) !important;
+    backdrop-filter: blur(20px);
+    border: var(--glass-border);
+    border-radius: var(--border-radius-pill);
+    margin: 20px 20px 0 20px;
+    /* Floating margin */
+    padding: 15px 30px;
+    box-shadow: var(--shadow-soft);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #fff !important;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    margin: 0 10px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border: var(--glass-border);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0, 229, 255, 0.15);
+    border-color: rgba(0, 229, 255, 0.3);
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: var(--glass-border);
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    padding: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    border-radius: var(--border-radius-pill);
+    padding: 10px 25px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.btn-neon {
+    background: var(--primary-color);
+    color: #000;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+}
+
+.btn-neon:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 6px 20px rgba(0, 229, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Forms */
+.form-control {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 15px;
+    padding: 12px 20px;
+}
+
+.form-control:focus {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+    color: #fff;
+}
+
+.input-group-text {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    color: var(--text-muted);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+    /* Offset for fixed header if needed, but nav is relative here */
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #fff, var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+/* Dashboard Utilities */
+.hover-scale {
+    transition: transform 0.2s;
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+
+/* Table Styling */
+.table {
+    color: var(--text-color);
+}
+
+.table-dark {
+    --bs-table-bg: transparent;
+}
+
+.table thead th {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.table td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+/* Content Section (for forms and lists) */
+.content-section {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    border: var(--glass-border);
+    margin-bottom: 30px;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 15px;
+    border: none;
+    background: rgba(0, 229, 255, 0.1);
+    color: var(--primary-color);
+}
+
+/* Admin Dashboard Redesign */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: rgba(21, 31, 50, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1);
+    border-color: var(--primary-color);
+}
+
+.stat-card h3 {
+    font-size: 3rem;
+    font-family: var(--font-heading);
+    color: #fff;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.stat-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Specific Colors for Stats */
+.stat-users::before {
+    background: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.stat-courses::before {
+    background: var(--secondary-color);
+    box-shadow: 0 0 15px var(--secondary-color);
+}
+
+.stat-colleges::before {
+    background: #10B981;
+    box-shadow: 0 0 15px #10B981;
+}
+
+/* Emerald Green */
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    .btn-neon {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .ml-3 {
+        margin-left: 0 !important;
+    }
+}

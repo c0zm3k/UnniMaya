@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <h2 class="mb-4 text-primary">Manage Users</h2>
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Skills</th>
+                    <th>Interests</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <span class="badge {{ 'bg-warning' if user.role == 'admin' else 'bg-info' }}">
+                            {{ user.role }}
+                        </span>
+                    </td>
+                    <td>{{ user.skills if user.skills else '-' }}</td>
+                    <td>{{ user.interests if user.interests else '-' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{{ url_for('admin_bp.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+{% endblock %}
