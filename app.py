@@ -10,16 +10,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 from flask_bcrypt import Bcrypt
-from extensions import db, bcrypt, login_manager
+from src.extensions import db, bcrypt, login_manager
 
 db.init_app(app)
 bcrypt.init_app(app)
 login_manager.init_app(app)
 
-from routes_auth import auth
-from routes_user import main
-from routes_admin import admin_bp
-from routes_api import api_bp
+from src.routes_auth import auth
+from src.routes_user import main
+from src.routes_admin import admin_bp
+from src.routes_api import api_bp
 
 app.register_blueprint(auth)
 app.register_blueprint(main)
@@ -28,7 +28,7 @@ app.register_blueprint(api_bp)
 
 # Create DB
 with app.app_context():
-    from models import User, Course, College # Import models to ensure they are registered
+    from src.models import User, Course, College # Import models to ensure they are registered
     db.create_all()
     # Create Admin if not exists (handled in register but good to have a seeder)
     if 'User' in globals():

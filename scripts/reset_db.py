@@ -1,6 +1,8 @@
+import sys
+sys.path.insert(0, '..')
 from app import app
-from extensions import db, bcrypt
-from models import User, Course, Job, Internship, College
+from src.extensions import db, bcrypt
+from src.models import User, Course, Job, Internship, College
 import random
 
 def reset_database():

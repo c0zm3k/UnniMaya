@@ -61,7 +61,7 @@ The engine now adapts to your current educational standing:
    ```
 3. **Database Reset (Optional)**
    ```bash
-   python reset_db.py  # Severs all tables and populates 11,000+ records
+   python scripts/reset_db.py  # Severs all tables and populates 11,000+ records
    ```
 4. **Launch**
    ```bash
@@ -91,12 +91,26 @@ We have pre-configured 7 accounts for immediate testing.
 
 ```text
 FutureFit/
-├── static/css/        # Neumorphic styling system
-├── templates/         # Soft-UI Jinja2 layouts
-├── app.py             # Entry point (Port 3000)
-├── models.py          # Schema (User, Job, Internship, College, Course)
-├── reset_db.py        # High-volume data factory
-└── ml_model.py        # Intelligence & filtering logic
+├── src/                  # Core application modules
+│   ├── models.py         # Database schemas
+│   ├── forms.py          # WTForms definitions
+│   ├── extensions.py     # Flask extensions (DB, Bcrypt, LoginManager)
+│   ├── ml_model.py       # AI recommendation engine
+│   ├── routes_auth.py    # Authentication routes
+│   ├── routes_user.py    # User dashboard & recommendations
+│   ├── routes_admin.py   # Admin panel routes
+│   └── routes_api.py     # REST API endpoints
+├── static/               # Frontend assets
+│   ├── css/              # Neumorphic stylesheets
+│   └── js/               # JavaScript files
+├── templates/            # Jinja2 HTML templates
+├── scripts/              # Utility scripts
+│   ├── reset_db.py       # Database seeding
+│   └── check_counts.py   # Data verification
+├── tests/                # Test suites
+├── app.py                # Application entry point
+├── requirements.txt      # Python dependencies
+└── README.md             # Project documentation
 ```
 
 ---
