@@ -1,44 +1,143 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container text-center">
-    <h2>Recommended Career Path</h2>
-    <div class="cyber-card p-4 mt-3">
-        <h1 class="display-4 text-primary">{{ course }}</h1>
-        <p class="lead">Based on your interests and skills, this is the optimal path for you.</p>
+<div class="max-w-5xl mx-auto mt-12 px-4">
+    <div class="text-center mb-16">
+        <span class="text-nm-primary font-bold uppercase tracking-[0.3em] text-xs opacity-60 mb-4 block">Recommendation
+            Result</span>
+        <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-nm-text tracking-tighter">Recommended Career Path
+        </h2>
+    </div>
+
+    <div class="nm-flat p-12 mb-16 text-center border-t-4 border-nm-primary border-opacity-20">
+        <h1
+            class="font-orbitron text-3xl md:text-5xl font-bold text-nm-primary mb-6 animate-pulse uppercase tracking-wider">
+            {{ course }}</h1>
+        <p class="text-xl text-nm-text opacity-60 max-w-2xl mx-auto leading-relaxed">
+            Based on your unique combination of skills and interests, our AI has identified this as your optimal
+            trajectory.
+        </p>
     </div>
 
     {% if job_roles %}
-    <div class="mt-4 mb-4">
-        <h4><i class="fas fa-briefcase"></i> Potential Career Paths</h4>
-        <div class="d-flex justify-content-center flex-wrap gap-2 mt-2">
+    <div class="mb-16">
+        <h4 class="font-orbitron text-xl font-bold text-nm-text opacity-40 mb-10 text-center uppercase tracking-widest">
+            Potential Roles</h4>
+        <div class="flex flex-wrap justify-center gap-6">
             {% for job in job_roles %}
-            <span class="badge rounded-pill bg-info text-dark p-2" style="font-size: 0.9rem; margin: 5px;">{{ job
-                }}</span>
+            <div
+                class="nm-flat px-8 py-4 rounded-full font-bold text-nm-primary flex items-center gap-2 transform transition-transform hover:scale-110">
+                <i class="bi bi-patch-check-fill opacity-40"></i> {{ job }}
+            </div>
             {% endfor %}
         </div>
     </div>
     {% endif %}
 
-    <h3 class="mt-5">Recommended Colleges</h3>
-    <div class="row mt-3">
-        {% for college in colleges %}
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">{{ college.name }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ college.location }}</h6>
-                    <p class="card-text">
-                        <strong>Cutoff:</strong> {{ college.cutoff_score }}%<br>
-                        <strong>Fees:</strong> ${{ college.fees }}
-                    </p>
+    {% if suggested_courses %}
+    <h3
+        class="font-orbitron text-2xl font-bold text-nm-text mt-20 mb-12 text-center uppercase tracking-widest border-b border-nm-text border-opacity-5 pb-6">
+        Recommended Specialized Courses</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {% for crs in suggested_courses %}
+        <div class="nm-flat p-8 flex flex-col transform transition-all hover:-translate-y-2">
+            <h5 class="font-orbitron text-xl font-bold text-nm-primary mb-4 uppercase tracking-tight">{{ crs.title }}
+            </h5>
+            <p class="text-sm opacity-70 mb-6 flex-grow leading-relaxed">{{ crs.description[:120] }}...</p>
+            <div class="pt-4 border-t border-nm-primary border-opacity-10">
+                <span class="text-xs font-bold uppercase tracking-wider opacity-40 block mb-2">Required Skills</span>
+                <p class="text-xs font-semibold text-nm-text">{{ crs.skills_required }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if internships %}
+    <h3
+        class="font-orbitron text-2xl font-bold text-nm-text mt-20 mb-12 text-center uppercase tracking-widest border-b border-nm-text border-opacity-5 pb-6">
+        Exclusive Internship Opportunities</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {% for intern in internships %}
+        <div class="nm-flat p-8 flex flex-col transform transition-all hover:-translate-y-2">
+            <h5 class="font-orbitron text-xl font-bold text-nm-accent mb-2 uppercase tracking-tight">{{ intern.title }}
+            </h5>
+            <h6 class="text-xs font-bold opacity-60 mb-6 uppercase tracking-wider"><i class="bi bi-building mr-2"></i>
+                {{ intern.company }}</h6>
+            <p class="text-sm opacity-70 mb-8">{{ intern.description[:100] }}...</p>
+            <div class="nm-inset p-4 rounded-xl flex flex-col gap-2 mt-auto bg-white/10">
+                <div class="flex justify-between items-center w-full">
+                    <span class="text-xs font-bold opacity-40 uppercase tracking-tighter">Duration</span>
+                    <span class="font-bold text-nm-text text-xs">{{ intern.duration }}</span>
+                </div>
+                <div class="flex justify-between items-center w-full pt-2 border-t border-nm-text border-opacity-5">
+                    <span class="text-xs font-bold opacity-40 uppercase tracking-tighter">Mode</span>
+                    <span class="font-bold text-nm-accent text-xs">{{ intern.work_mode }}</span>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+    {% endif %}
 
-    <div class="mt-4">
-        <a href="{{ url_for('main.recommend') }}" class="btn btn-secondary">Try Again</a>
+    {% if jobs %}
+    <h3
+        class="font-orbitron text-2xl font-bold text-nm-text mt-20 mb-12 text-center uppercase tracking-widest border-b border-nm-text border-opacity-5 pb-6">
+        Strategic Job Openings</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {% for job in jobs %}
+        <div class="nm-flat p-8 flex flex-col transform transition-all hover:-translate-y-2">
+            <h5 class="font-orbitron text-xl font-bold text-nm-primary mb-2 uppercase tracking-tight">{{ job.title }}
+            </h5>
+            <h6 class="text-xs font-bold opacity-60 mb-6 uppercase tracking-wider"><i
+                    class="bi bi-briefcase-fill mr-2"></i> {{ job.company }}</h6>
+            <p class="text-sm opacity-70 mb-8 leading-relaxed">{{ job.description[:120] }}...</p>
+            <div class="nm-inset p-4 rounded-xl flex flex-col gap-2 mt-auto">
+                <div class="flex justify-between items-center w-full">
+                    <span class="text-xs font-bold opacity-40 uppercase tracking-tighter">Min Qual.</span>
+                    <span class="font-bold text-nm-text text-xs">{{ job.qualification_required }}</span>
+                </div>
+                <div class="flex justify-between items-center w-full pt-2 border-t border-nm-text border-opacity-5">
+                    <span class="text-xs font-bold opacity-40 uppercase tracking-tighter">Work Mode</span>
+                    <span class="font-bold text-nm-primary text-xs">{{ job.work_mode }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if colleges %}
+    <h3
+        class="font-orbitron text-2xl font-bold text-nm-text mt-20 mb-12 text-center uppercase tracking-widest border-b border-nm-text border-opacity-5 pb-6">
+        Premium College Recommendations</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {% for college in colleges %}
+        <div class="nm-flat p-8 flex flex-col transform transition-all hover:-translate-y-2">
+            <h5 class="font-orbitron text-xl font-bold text-nm-accent mb-2 uppercase tracking-tight">{{ college.name }}
+            </h5>
+            <h6 class="text-sm font-semibold opacity-40 mb-8 lowercase tracking-tight flex items-center">
+                <i class="bi bi-geo-alt-fill mr-2 opacity-30"></i> {{ college.location }}
+            </h6>
+            <div class="nm-inset p-5 rounded-2xl flex justify-between items-center mt-auto">
+                <div class="text-center">
+                    <span class="block text-[10px] uppercase font-bold opacity-30 mb-1">Cutoff</span>
+                    <span class="font-bold text-nm-text text-lg">{{ college.cutoff_score }}%</span>
+                </div>
+                <div class="text-center border-l border-nm-text border-opacity-5 pl-6">
+                    <span class="block text-[10px] uppercase font-bold opacity-30 mb-1">Tuition</span>
+                    <span class="font-bold text-nm-text text-lg">${{ college.fees }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="mt-20 text-center">
+        <a href="{{ url_for('main.recommend') }}"
+            class="nm-btn inline-flex items-center gap-4 rounded-2xl py-5 px-12 font-bold text-lg hover:text-nm-primary transition-all">
+            <i class="bi bi-arrow-repeat text-2xl"></i> Refine Recommendation
+        </a>
     </div>
 </div>
 {% endblock %}

@@ -1,78 +1,117 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Join Today</legend>
-            <div class="form-group">
-                {{ form.username.label(class="form-control-label") }}
+<div class="max-w-md mx-auto mt-20">
+    <div class="nm-flat p-10">
+        <h2
+            class="font-orbitron text-2xl font-bold mb-8 text-nm-primary border-b border-nm-primary border-opacity-10 pb-4">
+            Join Today</h2>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
 
+            <div class="mb-6">
+                {{ form.username.label(class="block text-sm font-bold opacity-60 mb-2 uppercase tracking-wide") }}
                 {% if form.username.errors %}
-                {{ form.username(class="form-control is-invalid") }}
-                <div class="invalid-feedback">
+                {{ form.username(class="nm-input border-red-400 placeholder-nm-text/30") }}
+                <div class="text-xs text-red-500 mt-1 ml-2 font-bold">
                     {% for error in form.username.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.username(class="form-control") }}
+                {{ form.username(class="nm-input placeholder-nm-text/30") }}
                 {% endif %}
             </div>
-            <div class="form-group">
-                {{ form.email.label(class="form-control-label") }}
+
+            <div class="mb-6">
+                {{ form.email.label(class="block text-sm font-bold opacity-60 mb-2 uppercase tracking-wide") }}
                 {% if form.email.errors %}
-                {{ form.email(class="form-control is-invalid") }}
-                <div class="invalid-feedback">
+                {{ form.email(class="nm-input border-red-400 placeholder-nm-text/30") }}
+                <div class="text-xs text-red-500 mt-1 ml-2 font-bold">
                     {% for error in form.email.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.email(class="form-control") }}
+                {{ form.email(class="nm-input placeholder-nm-text/30") }}
                 {% endif %}
             </div>
-            <div class="form-group">
-                {{ form.password.label(class="form-control-label") }}
-                <div class="input-group">
+
+            <div class="mb-6">
+                {{ form.password.label(class="block text-sm font-bold opacity-60 mb-2 uppercase tracking-wide") }}
+                <div class="relative">
                     {% if form.password.errors %}
-                    {{ form.password(class="form-control is-invalid", id="password") }}
-                    <div class="invalid-feedback">
+                    {{ form.password(class="nm-input border-red-400 placeholder-nm-text/30", id="password") }}
+                    <div class="text-xs text-red-500 mt-1 ml-2 font-bold">
                         {% for error in form.password.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                     {% else %}
-                    {{ form.password(class="form-control", id="password") }}
+                    {{ form.password(class="nm-input placeholder-nm-text/30", id="password") }}
                     {% endif %}
-                    <span class="input-group-text cursor-pointer"
-                        onclick="togglePassword('password', 'togglePasswordIcon1')">
-                        <i class="bi bi-eye" id="togglePasswordIcon1"></i>
+                    <span
+                        class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-nm-text opacity-40 hover:opacity-100 transition-opacity"
+                        onclick="togglePassword('password', 'togglePasswordIcon')">
+                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
                     </span>
                 </div>
             </div>
-            <div class="form-group">
-                {{ form.confirm_password.label(class="form-control-label") }}
+
+            <div class="mb-8">
+                {{ form.confirm_password.label(class="block text-sm font-bold opacity-60 mb-2 uppercase tracking-wide")
+                }}
                 {% if form.confirm_password.errors %}
-                {{ form.confirm_password(class="form-control is-invalid") }}
-                <div class="invalid-feedback">
+                {{ form.confirm_password(class="nm-input border-red-400 placeholder-nm-text/30") }}
+                <div class="text-xs text-red-500 mt-1 ml-2 font-bold">
                     {% for error in form.confirm_password.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.confirm_password(class="form-control") }}
+                {{ form.confirm_password(class="nm-input placeholder-nm-text/30") }}
                 {% endif %}
-            </div>
-        </fieldset>
-        <div class="form-group mt-3">
-            {{ form.submit(class="btn btn-outline-info") }}
-        </div>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already have an account? <a class="ml-2" href="{{ url_for('auth.login') }}">Sign In</a>
-            </small>
-        </div>
-    </form>
+                <div class="mb-8">
+                    {{ form.qualification.label(class="block text-sm font-bold opacity-60 mb-2 uppercase tracking-wide")
+                    }}
+                    {% if form.qualification.errors %}
+                    {{ form.qualification(class="nm-input border-red-400") }}
+                    <div class="text-xs text-red-500 mt-1 ml-2 font-bold">
+                        {% for error in form.qualification.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.qualification(class="nm-input focus:ring-0") }}
+                    {% endif %}
+                </div>
+
+                <div class="mb-8">
+                    {{ form.submit(class="nm-btn w-full rounded-2xl py-4 font-bold text-lg hover:text-nm-primary") }}
+                </div>
+
+                <div class="pt-6 border-t border-nm-primary border-opacity-10 text-center">
+                    <p class="text-sm opacity-60">
+                        Already have an account? <a class="font-bold text-nm-primary hover:underline"
+                            href="{{ url_for('auth.login') }}">Sign In</a>
+                    </p>
+                </div>
+        </form>
+    </div>
 </div>
+
+<script>
+    function togglePassword(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        }
+    }
+</script>
 {% endblock %}

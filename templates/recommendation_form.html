@@ -1,26 +1,54 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Complete your Profile for Recommendations</legend>
-            <div class="form-group">
-                {{ form.skills.label(class="form-control-label") }}
-                {{ form.skills(class="form-control") }}
+<div class="max-w-2xl mx-auto mt-12">
+    <div class="nm-flat p-10">
+        <h2
+            class="font-orbitron text-2xl font-bold mb-8 text-nm-primary border-b border-nm-primary border-opacity-10 pb-4 uppercase tracking-widest">
+            Career Profile</h2>
+        <p class="text-sm opacity-60 mb-10 leading-relaxed font-semibold">Provide your technical skills and interests to
+            generate custom career trajectories.</p>
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-8">
+                {{ form.skills.label(class="block text-xs font-bold opacity-40 mb-3 uppercase tracking-widest") }}
+                {{ form.skills(class="nm-input placeholder-nm-text/20", placeholder="e.g. Python, SQL, Project
+                Management") }}
+                {% if form.skills.errors %}
+                <div class="text-xs text-red-500 mt-2 font-bold">
+                    {% for error in form.skills.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+                {% endif %}
             </div>
-            <div class="form-group">
-                {{ form.interests.label(class="form-control-label") }}
-                {{ form.interests(class="form-control") }}
+
+            <div class="mb-8">
+                {{ form.interests.label(class="block text-xs font-bold opacity-40 mb-3 uppercase tracking-widest") }}
+                {{ form.interests(class="nm-input placeholder-nm-text/20", placeholder="e.g. Data Science, Web Design,
+                Sustainability") }}
+                {% if form.interests.errors %}
+                <div class="text-xs text-red-500 mt-2 font-bold">
+                    {% for error in form.interests.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+                {% endif %}
             </div>
-            <div class="form-group">
-                {{ form.experience.label(class="form-control-label") }}
-                {{ form.experience(class="form-control") }}
+
+            <div class="mb-10">
+                {{ form.experience.label(class="block text-xs font-bold opacity-40 mb-3 uppercase tracking-widest") }}
+                {{ form.experience(class="nm-input placeholder-nm-text/20", placeholder="e.g. 2 years in tech support,
+                entry level") }}
+                {% if form.experience.errors %}
+                <div class="text-xs text-red-500 mt-2 font-bold">
+                    {% for error in form.experience.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+                {% endif %}
             </div>
-        </fieldset>
-        <div class="form-group mt-3">
-            {{ form.submit(class="btn btn-primary") }}
-        </div>
-    </form>
+
+            <div class="pt-6">
+                {{ form.submit(class="nm-btn w-full rounded-2xl py-4 font-bold text-lg hover:text-nm-primary flex
+                items-center justify-center gap-3") }}
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

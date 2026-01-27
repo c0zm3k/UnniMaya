@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(10), nullable=False, default='user') # 'user' or 'admin'
     
     # Profile Data for Recommendations
+    qualification = db.Column(db.String(20), nullable=False, default='12th') # '12th', 'UG', 'PG'
     skills = db.Column(db.String(200)) # stored as comma-separated string
     interests = db.Column(db.String(200))
     experience = db.Column(db.String(50))
@@ -21,16 +22,42 @@ class User(db.Model, UserMixin):
     feedbacks = db.relationship('Feedback', backref='author', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}')"
+        return f"User('{self.username}', '{self.email}', '{self.qualification}')"
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     skills_required = db.Column(db.String(200), nullable=False)
+    level = db.Column(db.String(20), nullable=False, default='UG') # 'Diploma', 'UG', 'PG'
     
     def __repr__(self):
-        return f"Course('{self.title}')"
+        return f"Course('{self.title}', '{self.level}')"
+
+class Job(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    company = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    skills_required = db.Column(db.String(200), nullable=False)
+    qualification_required = db.Column(db.String(20), nullable=False) # 'Diploma', 'UG', 'PG'
+    work_mode = db.Column(db.String(20), nullable=False, default='Onsite') # 'Onsite', 'Hybrid', 'WFH'
+
+    def __repr__(self):
+        return f"Job('{self.title}', '{self.company}', '{self.work_mode}')"
+
+class Internship(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    company = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    skills_required = db.Column(db.String(200), nullable=False)
+    duration = db.Column(db.String(50))
+    qualification_required = db.Column(db.String(20), nullable=False) # 'Diploma', 'UG', 'PG'
+    work_mode = db.Column(db.String(20), nullable=False, default='Onsite') # 'Onsite', 'Hybrid', 'WFH'
+
+    def __repr__(self):
+        return f"Internship('{self.title}', '{self.company}', '{self.work_mode}')"
 
 class College(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -22,7 +22,7 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         # Default role is 'user'. Admin creation removed from here.
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password, role='user')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, role='user', qualification=form.qualification.data)
         
         db.session.add(user)
         db.session.commit()

@@ -1,37 +1,70 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>Admin Dashboard</h2>
-<div class="stats-grid">
-    <a href="{{ url_for('admin_bp.view_users') }}" class="text-decoration-none">
-        <div class="stat-card stat-users">
-            <h3>{{ users_count }}</h3>
-            <p>Total Users</p>
-        </div>
-    </a>
-    <a href="{{ url_for('admin_bp.view_courses') }}" class="text-decoration-none">
-        <div class="stat-card stat-courses">
-            <h3>{{ courses_count }}</h3>
-            <p>Total Courses</p>
-        </div>
-    </a>
-    <a href="{{ url_for('admin_bp.view_colleges') }}" class="text-decoration-none">
-        <div class="stat-card stat-colleges">
-            <h3>{{ colleges_count }}</h3>
-            <p>Total Colleges</p>
-        </div>
-    </a>
+<div class="mb-12">
+    <h2 class="font-orbitron text-3xl font-bold text-nm-text tracking-widest uppercase mb-2">Admin Dashboard</h2>
+    <p class="text-nm-primary font-semibold opacity-60">System Oversight & Resource Management</p>
 </div>
 
-<div class="row mt-4">
-    <div class="col-md-6 mb-3">
-        <a href="{{ url_for('admin_bp.new_course') }}" class="btn btn-neon w-100 p-3">
-            <i class="fas fa-plus-circle"></i> Add New Course
-        </a>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-16">
+    <a href="{{ url_for('admin_bp.view_users') }}"
+        class="nm-flat p-6 text-center transform transition-all hover:-translate-y-2 group">
+        <div
+            class="w-12 h-12 nm-inset mx-auto rounded-full flex items-center justify-center mb-4 group-hover:text-nm-primary duration-300">
+            <i class="bi bi-people-fill text-xl"></i>
+        </div>
+        <h3 class="text-3xl font-orbitron font-bold text-nm-text mb-1">{{ users_count }}</h3>
+        <p class="text-[10px] font-bold uppercase tracking-widest opacity-50">Users</p>
+    </a>
+    <a href="{{ url_for('admin_bp.view_courses') }}"
+        class="nm-flat p-6 text-center transform transition-all hover:-translate-y-2 group">
+        <div
+            class="w-12 h-12 nm-inset mx-auto rounded-full flex items-center justify-center mb-4 group-hover:text-nm-primary duration-300">
+            <i class="bi bi-mortarboard-fill text-xl"></i>
+        </div>
+        <h3 class="text-3xl font-orbitron font-bold text-nm-text mb-1">{{ courses_count }}</h3>
+        <p class="text-[10px] font-bold uppercase tracking-widest opacity-50">Courses</p>
+    </a>
+    <a href="{{ url_for('admin_bp.view_colleges') }}"
+        class="nm-flat p-6 text-center transform transition-all hover:-translate-y-2 group">
+        <div
+            class="w-12 h-12 nm-inset mx-auto rounded-full flex items-center justify-center mb-4 group-hover:text-nm-primary duration-300">
+            <i class="bi bi-bank2 text-xl"></i>
+        </div>
+        <h3 class="text-3xl font-orbitron font-bold text-nm-text mb-1">{{ colleges_count }}</h3>
+        <p class="text-[10px] font-bold uppercase tracking-widest opacity-50">Colleges</p>
+    </a>
+    <div class="nm-flat p-6 text-center transform transition-all hover:-translate-y-1">
+        <div class="w-12 h-12 nm-inset mx-auto rounded-full flex items-center justify-center mb-4 text-nm-primary">
+            <i class="bi bi-briefcase-fill text-xl"></i>
+        </div>
+        <h3 class="text-3xl font-orbitron font-bold text-nm-text mb-1">{{ jobs_count }}</h3>
+        <p class="text-[10px] font-bold uppercase tracking-widest opacity-50">Jobs</p>
     </div>
-    <div class="col-md-6 mb-3">
-        <a href="{{ url_for('admin_bp.new_college') }}" class="btn btn-neon w-100 p-3">
-            <i class="fas fa-university"></i> Add New College
-        </a>
+    <div class="nm-flat p-6 text-center transform transition-all hover:-translate-y-1">
+        <div class="w-12 h-12 nm-inset mx-auto rounded-full flex items-center justify-center mb-4 text-nm-accent">
+            <i class="bi bi-building-fill text-xl"></i>
+        </div>
+        <h3 class="text-3xl font-orbitron font-bold text-nm-text mb-1">{{ internships_count }}</h3>
+        <p class="text-[10px] font-bold uppercase tracking-widest opacity-50">Internships</p>
     </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <a href="{{ url_for('admin_bp.new_course') }}"
+        class="nm-btn rounded-2xl p-5 flex items-center justify-center gap-3 text-sm font-bold hover:text-nm-primary transition-all">
+        <i class="bi bi-plus-circle-fill"></i> New Course
+    </a>
+    <a href="{{ url_for('admin_bp.new_college') }}"
+        class="nm-btn rounded-2xl p-5 flex items-center justify-center gap-3 text-sm font-bold hover:text-nm-primary transition-all">
+        <i class="bi bi-building-fill-add"></i> New College
+    </a>
+    <a href="{{ url_for('admin_bp.new_job') }}"
+        class="nm-btn rounded-2xl p-5 flex items-center justify-center gap-3 text-sm font-bold hover:text-nm-primary transition-all">
+        <i class="bi bi-briefcase-fill"></i> Post Job
+    </a>
+    <a href="{{ url_for('admin_bp.new_internship') }}"
+        class="nm-btn rounded-2xl p-5 flex items-center justify-center gap-3 text-sm font-bold hover:text-nm-primary transition-all">
+        <i class="bi bi-patch-plus-fill"></i> New Internship
+    </a>
 </div>
 {% endblock %}

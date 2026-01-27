@@ -1,37 +1,49 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
-    <h2 class="mb-4 text-primary">Manage Users</h2>
-    <div class="table-responsive">
-        <table class="table table-dark table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Skills</th>
-                    <th>Interests</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <span class="badge {{ 'bg-warning' if user.role == 'admin' else 'bg-info' }}">
-                            {{ user.role }}
-                        </span>
-                    </td>
-                    <td>{{ user.skills if user.skills else '-' }}</td>
-                    <td>{{ user.interests if user.interests else '-' }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="nm-flat p-10 mt-12">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+        <h2 class="font-orbitron text-2xl font-bold text-nm-text tracking-widest uppercase">User Directory</h2>
+        <a href="{{ url_for('admin_bp.dashboard') }}"
+            class="nm-btn rounded-xl py-2 px-6 text-sm font-semibold flex items-center gap-2">
+            <i class="bi bi-arrow-left"></i> Dashboard
+        </a>
     </div>
-    <a href="{{ url_for('admin_bp.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+
+    <div class="nm-inset p-2 rounded-3xl overflow-hidden shadow-inner">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-nm-text bg-opacity-5">
+                    <tr>
+                        <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest opacity-40">ID</th>
+                        <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest opacity-40">Username</th>
+                        <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest opacity-40">Email</th>
+                        <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest opacity-40">Role</th>
+                        <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest opacity-40">Skills</th>
+                        <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest opacity-40">Interests</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-nm-text divide-opacity-5">
+                    {% for user in users %}
+                    <tr class="hover:bg-nm-text hover:bg-opacity-[0.02] transition-colors">
+                        <td class="px-6 py-4 font-mono text-sm opacity-50">{{ user.id }}</td>
+                        <td class="px-6 py-4 font-bold text-nm-text">{{ user.username }}</td>
+                        <td class="px-6 py-4 text-sm opacity-70">{{ user.email }}</td>
+                        <td class="px-6 py-4">
+                            {% if user.role == 'admin' %}
+                            <span
+                                class="nm-flat px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-nm-primary">Admin</span>
+                            {% else %}
+                            <span
+                                class="nm-inset px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-nm-text opacity-40">User</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-6 py-4 text-xs opacity-60">{{ user.skills if user.skills else '-' }}</td>
+                        <td class="px-6 py-4 text-xs opacity-60">{{ user.interests if user.interests else '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}

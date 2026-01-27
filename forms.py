@@ -8,14 +8,10 @@ class RegistrationForm(FlaskForm):
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[
-        DataRequired(),
-        # Strong Password Policy:
-        # At least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
-        # Note: wtforms Regexp requires import
-    ])
+    password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password')])
+                                      validators=[DataRequired(), EqualTo('password')])
+    qualification = SelectField('Current Qualification', choices=[('12th', '12th (School)'), ('UG', 'Undergraduate'), ('PG', 'Postgraduate')], validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
     def validate_password(self, password):
@@ -58,8 +54,26 @@ class RecommendationForm(FlaskForm):
 class CourseForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
-    skills_required = StringField('Skills Required', validators=[DataRequired()])
+    skills_required = StringField('Skills Required (comma separated)', validators=[DataRequired()])
+    level = SelectField('Educational Level', choices=[('UG', 'Undergraduate (for 12th)'), ('PG', 'Postgraduate (for UG)')])
     submit = SubmitField('Add Course')
+
+class JobForm(FlaskForm):
+    title = StringField('Job Title', validators=[DataRequired()])
+    company = StringField('Company', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    skills_required = StringField('Skills Required (comma separated)', validators=[DataRequired()])
+    qualification_required = SelectField('Min Qualification', choices=[('UG', 'Undergraduate'), ('PG', 'Postgraduate')])
+    submit = SubmitField('Post Job')
+
+class InternshipForm(FlaskForm):
+    title = StringField('Internship Title', validators=[DataRequired()])
+    company = StringField('Company', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    skills_required = StringField('Skills Required (comma separated)', validators=[DataRequired()])
+    duration = StringField('Duration', validators=[DataRequired()])
+    qualification_required = SelectField('Min Qualification', choices=[('UG', 'Undergraduate'), ('PG', 'Postgraduate')])
+    submit = SubmitField('Post Internship')
 
 class CollegeForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])

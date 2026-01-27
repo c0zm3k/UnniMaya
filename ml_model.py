@@ -29,8 +29,6 @@ class RecommendationEngine:
         pass 
 
     def predict(self, interest, skill):
-        # Simple keyword matching logic that mimics the "Decision Tree" logic
-        # Ideally, we load the pickled model here.
         interest = interest.lower()
         skill = skill.lower()
         
@@ -44,6 +42,41 @@ class RecommendationEngine:
             return 'Cybersecurity'
         else:
             return 'General Computer Science'
+
+    def get_recommendations(self, user_qualification, user_interest, user_skill):
+        interest = user_interest.lower()
+        skill = user_skill.lower()
+        
+        # 1. Course Recommendation
+        recommended_course_title = self.predict(interest, skill)
+        
+        # 2. Filtering Logic based on Qualification
+        # - 12th: Courses (UG), Colleges
+        # - UG: Internships, Jobs (Entry), Courses (PG)
+        # - PG: Jobs (Pro), Internships
+        
+        results = {
+            'course': None,
+            'colleges': [],
+            'jobs': [],
+            'internships': []
+        }
+        
+        # Fetch relevant models (This logic will be handled in routes_user.py to avoid DB imports in ML)
+        # We return the "Type" and "Criteria" here
+        
+        if user_qualification == '12th':
+            results['type'] = 'academic'
+            results['target_levels'] = ['UG', 'Diploma'] # Both Degree and Diploma paths
+        elif user_qualification == 'UG':
+            results['type'] = 'career_advancement'
+            results['target_levels'] = ['PG'] # Looking for PG courses
+        elif user_qualification == 'PG':
+            results['type'] = 'professional'
+            results['target_levels'] = [] # No more academic paths usually, focus on jobs
+            
+        results['suggested_course'] = recommended_course_title
+        return results
 
     def get_job_roles(self, course_name):
         job_map = {

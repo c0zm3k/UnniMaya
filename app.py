@@ -44,4 +44,5 @@ if __name__ == '__main__':
         return {'year': datetime.utcnow().year}
 
     debug_mode = os.environ.get('FLASK_DEBUG', 'True') == 'True'
-    app.run(debug=debug_mode)
+    port = int(os.environ.get('PORT', 3000))
+    app.run(debug=debug_mode, port=port)

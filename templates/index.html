@@ -1,35 +1,92 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="hero">
-    <h1>Future <span class="highlight">Ready</span></h1>
-    <p>AI-Powered Career & College Recommendations designed for your success.</p>
+<div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 relative">
+    <h1 class="font-orbitron text-5xl md:text-7xl font-bold mb-6 text-nm-text tracking-tighter">
+        Future <span class="text-nm-primary">Ready</span>
+    </h1>
+    <p class="text-xl md:text-2xl text-nm-text opacity-70 mb-12 max-w-2xl leading-relaxed">
+        AI-Powered Career & College Recommendations designed for your success.
+    </p>
+
     {% if not current_user.is_authenticated %}
-    <div class="d-flex flex-column flex-md-row gap-3">
-        <a href="{{ url_for('auth.register') }}" class="btn btn-neon">Get Started</a>
-        <a href="{{ url_for('auth.login') }}" class="btn btn-neon">Login</a>
+    <div class="flex flex-col md:row gap-6">
+        <a href="{{ url_for('auth.register') }}"
+            class="nm-btn rounded-2xl py-4 px-10 text-lg font-bold hover:text-nm-primary transition-all">Get Started</a>
+        <a href="{{ url_for('auth.login') }}"
+            class="nm-btn rounded-2xl py-4 px-10 text-lg font-bold hover:text-nm-primary transition-all">Login</a>
     </div>
     {% else %}
-    <a href="{{ url_for('main.dashboard') }}" class="btn btn-neon">Go to Dashboard</a>
+    <a href="{{ url_for('main.dashboard') }}"
+        class="nm-btn rounded-2xl py-4 px-10 text-lg font-bold hover:text-nm-primary transition-all">Go to Dashboard</a>
     {% endif %}
 </div>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4 text-primary">Top Courses</h2>
-    <div id="courses-list" class="row">
+{% if not current_user.is_authenticated or current_user.role != 'admin' %}
+<div class="max-w-7xl mx-auto mt-20 px-4">
+    <div class="nm-flat p-10 md:p-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="font-orbitron text-3xl font-bold text-nm-primary mb-8 tracking-widest uppercase">About
+                    FutureFit</h2>
+                <div class="space-y-6 text-nm-text opacity-80 leading-relaxed text-lg">
+                    <p>
+                        <span class="font-bold text-nm-primary">FutureFit</span> is more than just a recommendation
+                        engine; it's your personal AI Career Architect. In an era of rapid technological shift, we help
+                        you stay ahead of the curve.
+                    </p>
+                    <p>
+                        Our sophisticated algorithms analyze your unique skills, passions, and background to construct
+                        high-precision career trajectories. We don't just suggest jobs—we map out the entire educational
+                        journey, highlighting the exact courses and elite institutions required to reach your goals.
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div class="nm-inset p-8 text-center rounded-3xl">
+                    <i class="bi bi-cpu-fill text-3xl text-nm-primary mb-4 block"></i>
+                    <h5 class="font-bold uppercase tracking-tighter text-sm mb-2">AI Precision</h5>
+                    <p class="text-xs opacity-60">Neural networks tailored for industry alignment.</p>
+                </div>
+                <div class="nm-inset p-8 text-center rounded-3xl">
+                    <i class="bi bi-shield-check text-3xl text-nm-primary mb-4 block"></i>
+                    <h5 class="font-bold uppercase tracking-tighter text-sm mb-2">Verified Data</h5>
+                    <p class="text-xs opacity-60">Real-time data from global educational networks.</p>
+                </div>
+                <div class="nm-inset p-8 text-center rounded-3xl">
+                    <i class="bi bi-graph-up-arrow text-3xl text-nm-primary mb-4 block"></i>
+                    <h5 class="font-bold uppercase tracking-tighter text-sm mb-2">Growth Maps</h5>
+                    <p class="text-xs opacity-60">Long-term strategic planning for your success.</p>
+                </div>
+                <div class="nm-inset p-8 text-center rounded-3xl">
+                    <i class="bi bi-people-fill text-3xl text-nm-primary mb-4 block"></i>
+                    <h5 class="font-bold uppercase tracking-tighter text-sm mb-2">Community</h5>
+                    <p class="text-xs opacity-60">Join thousands of professionals already on their path.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="container mx-auto mt-24">
+    <h2 class="font-orbitron text-3xl font-bold mb-12 text-center text-nm-primary uppercase tracking-widest">Top Courses
+    </h2>
+    <div id="courses-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         <!-- populated by JS -->
-        <div class="text-center text-muted">Loading courses via API...</div>
+        <div class="col-span-full text-center opacity-50 animate-pulse">Scanning database for courses...</div>
     </div>
 
-    <h2 class="text-center mb-4 mt-5 text-secondary">Featured Colleges</h2>
-    <div id="colleges-list" class="row">
+    <h2 class="font-orbitron text-3xl font-bold mb-12 mt-32 text-center text-nm-accent uppercase tracking-widest">
+        Featured Colleges</h2>
+    <div id="colleges-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         <!-- populated by JS -->
-        <div class="text-center text-muted">Loading colleges via API...</div>
+        <div class="col-span-full text-center opacity-50 animate-pulse">Connecting to college network...</div>
     </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const apiKey = 'default-api-key-123'; // In prod, this might be dynamic or public
+        const apiKey = 'futurefit-dev-key-789';
 
         // Fetch Courses
         fetch('/api/courses', {
@@ -40,18 +97,17 @@
                 const container = document.getElementById('courses-list');
                 container.innerHTML = '';
                 if (data.length === 0) {
-                    container.innerHTML = '<p class="text-center">No courses available.</p>';
+                    container.innerHTML = '<p class="col-span-full text-center opacity-50">No courses available.</p>';
                     return;
                 }
                 data.forEach(course => {
                     const html = `
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 career-card">
-                            <div class="card-body">
-                                <h5 class="card-title text-primary">${course.title}</h5>
-                                <p class="card-text">${course.description.substring(0, 100)}...</p>
-                                <small class="text-muted">Skills: ${course.skills_required}</small>
-                            </div>
+                    <div class="nm-flat p-8 flex flex-col h-full transform transition-all hover:-translate-y-2">
+                        <h5 class="font-orbitron text-xl font-bold text-nm-primary mb-4">${course.title}</h5>
+                        <p class="text-sm opacity-70 mb-6 flex-grow leading-relaxed">${course.description.substring(0, 120)}...</p>
+                        <div class="pt-4 border-t border-nm-primary border-opacity-10">
+                            <span class="text-xs font-bold uppercase tracking-wider opacity-40 block mb-2">Required Skills</span>
+                            <p class="text-xs font-semibold text-nm-text">${course.skills_required}</p>
                         </div>
                     </div>
                 `;
@@ -69,20 +125,24 @@
                 const container = document.getElementById('colleges-list');
                 container.innerHTML = '';
                 if (data.length === 0) {
-                    container.innerHTML = '<p class="text-center">No colleges available.</p>';
+                    container.innerHTML = '<p class="col-span-full text-center opacity-50">No colleges available.</p>';
                     return;
                 }
                 data.forEach(college => {
                     const html = `
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 career-card">
-                            <div class="card-body">
-                                <h5 class="card-title text-secondary">${college.name}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">${college.location}</h6>
-                                <p class="card-text">
-                                    Fees: $${college.fees}<br>
-                                    Cutoff: ${college.cutoff_score}%
-                                </p>
+                    <div class="nm-flat p-8 flex flex-col h-full transform transition-all hover:-translate-y-2">
+                        <h5 class="font-orbitron text-xl font-bold text-nm-accent mb-2">${college.name}</h5>
+                        <h6 class="text-sm font-semibold opacity-60 mb-6 flex items-center">
+                            <i class="bi bi-geo-alt-fill mr-2 text-nm-accent"></i> ${college.location}
+                        </h6>
+                        <div class="nm-inset p-4 rounded-xl flex justify-between items-center mt-auto">
+                            <div class="text-center">
+                                <span class="block text-[10px] uppercase font-bold opacity-40">Fees</span>
+                                <span class="font-bold text-nm-text">$${college.fees}</span>
+                            </div>
+                            <div class="text-center">
+                                <span class="block text-[10px] uppercase font-bold opacity-40">Cutoff</span>
+                                <span class="font-bold text-nm-text">${college.cutoff_score}%</span>
                             </div>
                         </div>
                     </div>

@@ -1,53 +1,45 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">{{ legend }}</legend>
-            <div class="form-group">
-                {{ form.title.label(class="form-control-label") }}
-                {% if form.title.errors %}
-                {{ form.title(class="form-control is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.title.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
+<div class="max-w-3xl mx-auto mt-12">
+    <div class="nm-flat p-10">
+        <h2
+            class="font-orbitron text-2xl font-bold mb-8 text-nm-primary border-b border-nm-primary border-opacity-10 pb-4 uppercase tracking-widest">
+            {{ legend }}</h2>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            {% for field in form if field.name not in ['csrf_token', 'submit'] %}
+            <div class="mb-8">
+                {{ field.label(class="block text-xs font-bold opacity-40 mb-3 uppercase tracking-widest") }}
+                {% if field.errors %}
+                {% if field.type == 'TextAreaField' %}
+                {{ field(class="nm-input border-red-400 placeholder-nm-text/20", rows="4") }}
+                {% else %}
+                {{ field(class="nm-input border-red-400 placeholder-nm-text/20") }}
+                {% endif %}
+                <div class="text-xs text-red-500 mt-2 font-bold">
+                    {% for error in field.errors %}<span>{{ error }}</span>{% endfor %}
                 </div>
                 {% else %}
-                {{ form.title(class="form-control") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.description.label(class="form-control-label") }}
-                {% if form.description.errors %}
-                {{ form.description(class="form-control is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.description.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
+                {% if field.type == 'TextAreaField' %}
+                {{ field(class="nm-input placeholder-nm-text/20", rows="4") }}
                 {% else %}
-                {{ form.description(class="form-control") }}
+                {{ field(class="nm-input placeholder-nm-text/20") }}
+                {% endif %}
+                {% endif %}
+                {% if field.name == 'skills_required' %}
+                <p class="text-[10px] mt-2 opacity-40 italic font-semibold uppercase tracking-tighter">* Comma separated
+                    list of required competencies.</p>
                 {% endif %}
             </div>
-            <div class="form-group">
-                {{ form.skills_required.label(class="form-control-label") }}
-                {% if form.skills_required.errors %}
-                {{ form.skills_required(class="form-control is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.skills_required.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.skills_required(class="form-control") }}
-                {% endif %}
+            {% endfor %}
+
+            <div class="flex gap-6 mt-10">
+                {{ form.submit(class="nm-btn flex-grow rounded-2xl py-4 font-bold text-lg hover:text-nm-primary") }}
+                <a href="{{ url_for('admin_bp.view_courses') }}"
+                    class="nm-btn flex-grow rounded-2xl py-4 font-bold text-lg text-center opacity-60">Cancel</a>
             </div>
-        </fieldset>
-        <div class="form-group mt-3">
-            {{ form.submit(class="btn btn-outline-info") }}
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 {% endblock %}

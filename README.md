@@ -1,134 +1,104 @@
-# 🌌 UnniMaya: AI Career Recommendation System
+# 🌌 FutureFit - AI Career Architect
 
-**UnniMaya** is a high-end, futuristic web application designed to help users navigate their career paths using AI-driven insights. Built with a cyberpunk aesthetic, it analyzes user skills and interests to recommend tailored career trajectories, courses, and colleges.
+> **A high-scale, Neumorphic AI Recommendation System for 12th, UG, and PG students.**
 
----
-
-## ✨ Features
-
-- **🚀 AI-Driven Recommendations**: Uses a rule-based engine (scalable to ML) to match skills and interests to career paths.
-- **🔐 Secure Authentication**: Full user signup, login, and session management system.
-- **🛠️ Admin Control Center**: A dedicated dashboard for administrators to manage users, courses, and colleges.
-- **🌐 Protected REST API**: Secure endpoints for programmatic access to course and college data.
-- **🎨 Immersive UI/UX**: Cyberpunk/Sci-Fi design with glassmorphism, neon accents, and smooth micro-animations.
-- **📱 Responsive Layout**: Fully optimized for desktop, tablet, and mobile experiences.
-- **💬 Feedback System**: Integrated system for users to provide feedback on recommendations.
+**FutureFit** is a premium career guidance platform that uses sophisticated mapping to align students with their ideal futures. Whether you are finishing school, completing a degree, or specializing further, FutureFit provides a tailored roadmap including courses, colleges, professional jobs, and strategic internships.
 
 ---
 
-## 🛠 Tech Stack
+## 📸 Core Aesthetic
 
-- **Backend**: [Python 3.x](https://www.python.org/), [Flask](https://flask.palletsprojects.com/)
-- **Database**: [SQLAlchemy](https://www.sqlalchemy.org/) (SQLite for development)
-- **Security**: [Flask-Bcrypt](https://flask-bcrypt.readthedocs.io/), [Flask-Login](https://flask-login.readthedocs.io/)
-- **Frontend**: HTML5, CSS3 (Custom Variables, Flexbox/Grid), JavaScript
-- **ML/Data**: [Scikit-learn](https://scikit-learn.org/), [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/)
-- **Forms**: [Flask-WTF](https://flask-wtf.readthedocs.io/)
-- **Fonts**: 'Orbitron' (Headers), 'Rajdhani' (Body)
+FutureFit utilizes a bespoke **Neumorphic (Soft UI)** design system, creating a tactile and immersive digital experience.
+
+| Landing Page | Recommendation Engine |
+| --- | --- |
+| ![Landing Page](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769499106629.png) | *Dynamic results with Work-Mode tracking* |
 
 ---
 
-## 📦 Installation & Setup
+## ✨ New & Advanced Features
 
-1.  **Clone the Repository**:
-    ```bash
-    git clone https://github.com/your-username/unnimaya.git
-    cd unnimaya
-    ```
+### 🎓 Qualification-Aware Recommendations
+The engine now adapts to your current educational standing:
+*   **12th/School Passed:** Suggests **Undergraduate degrees** and **Diploma** courses alongside top colleges.
+*   **UG Completed:** Focuses on **Postgraduate specialization**, **Internships**, and **Entry-level jobs**.
+*   **PG Completed:** Recommends **Professional careers** and **Advanced research internships**.
 
-2.  **Environment Setup**:
-    ```bash
-    python -m venv venv
-    # Windows
-    venv\Scripts\activate
-    # Mac/Linux
-    source venv/bin/activate
-    ```
+### 💼 Career Expansion Module
+*   **Massive Dataset:** Re-seeded with over **11,500 total records** including 25 colleges and 5,600+ career openings.
+*   **Work Modes:** Every Job and Internship now displays its operational status: **Onsite**, **Hybrid**, or **WFH (Work From Home)**.
+*   **Diploma Support:** Added specialized diploma paths for immediate skill acquisition.
 
-3.  **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
+### 📱 Mobile-First Responsive Design
+*   **Hamburger Navigation:** Smart collapsible menu for seamless mobile browsing.
+*   **Touch-Optimized:** All interactive elements are designed for finger-friendly tapping.
+*   **Fluid Breakpoints:** Adapts perfectly across phones, tablets, and desktops.
 
-4.  **Configure Environment Variables**:
-    Create a `.env` file in the root directory (refer to `.env.example`):
-    ```env
-    SECRET_KEY=your_secure_random_key
-    DATABASE_URL=sqlite:///site.db
-    API_KEY=your_api_key_for_endpoints
-    FLASK_DEBUG=True
-    ```
+---
 
-5.  **Initialize Database & Run**:
-    ```bash
-    python app.py
-    ```
-    Access the app at `http://127.0.0.1:5000`
+## 🛠️ Tech Stack
+
+*   **Logic:** Python 3.10+, Flask
+*   **Database:** SQLAlchemy (ORM) with a high-volume SQLite backend
+*   **Style:** Custom **Neumorphic CSS Framework** + Tailwind CSS
+*   **Auth:** Flask-Login with Bcrypt Hashing
+
+---
+
+## 🚀 Getting Started
+
+### Installation
+1. **Clone & Enter**
+   ```bash
+   git clone https://github.com/nihadniaze/FutureFit.git
+   cd FutureFit
+   ```
+2. **Environment Setup**
+   ```bash
+   python -m venv .venv
+   .\.venv\Scripts\activate  # Windows
+   pip install -r requirements.txt
+   ```
+3. **Database Reset (Optional)**
+   ```bash
+   python reset_db.py  # Severs all tables and populates 11,000+ records
+   ```
+4. **Launch**
+   ```bash
+   python app.py
+   ```
+
+---
+
+## 🔐 Credentials & Test Accounts
+
+We have pre-configured 7 accounts for immediate testing.
+**Common Password for all students:** `password123`
+
+| Level | Role/Username | Email | Focus Area |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `admin` | `admin@futurefit.ai` | System Management (`admin123`) |
+| **12th** | `sam_12th` | `sam@futurefit.ai` | AI & Technology |
+| **12th** | `jane_12th` | `jane@futurefit.ai` | UI/UX & Creative |
+| **UG** | `alex_ug` | `alex@futurefit.ai` | Data Science & Backend |
+| **UG** | `lily_ug` | `lily@futurefit.ai` | Full Stack & Design |
+| **PG** | `mark_pg` | `mark@futurefit.ai` | AI Research & Ethics |
+| **PG** | `sara_pg` | `sara@futurefit.ai` | Cloud & Security |
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-UnniMaya/
-├── app.py              # Main entry point & Blueprint registration
-├── models.py           # SQLAlchemy Database models (User, Course, College, Feedback)
-├── forms.py            # Flask-WTF forms for registration, login, and admin tasks
-├── extensions.py       # Extension initializations (DB, Bcrypt, LoginManager)
-├── ml_model.py         # AI Recommendation Engine logic
-├── routes_auth.py      # Authentication routes (Login, Signup, Logout)
-├── routes_user.py      # Main user facing routes & profile management
-├── routes_admin.py     # Admin dashboard and content management
-├── routes_api.py       # SECURE REST API endpoints
-├── static/             # CSS, JS, and Images
-└── templates/          # Jinja2 HTML Templates
+FutureFit/
+├── static/css/        # Neumorphic styling system
+├── templates/         # Soft-UI Jinja2 layouts
+├── app.py             # Entry point (Port 3000)
+├── models.py          # Schema (User, Job, Internship, College, Course)
+├── reset_db.py        # High-volume data factory
+└── ml_model.py        # Intelligence & filtering logic
 ```
 
 ---
 
-## 🛡 Admin Dashboard
-
-Administrators can access the management suite at `/admin/dashboard`. 
-- **Manage Users**: View and manage registered users.
-- **Course Management**: Add or update career-related courses.
-- **College Management**: Maintain a database of colleges and their affiliates.
-
----
-
-## 🔌 API Usage
-
-The system provides a protected API. All requests require an `x-api-key` header.
-
-- **GET `/api/courses`**: Retrieve all available courses.
-- **GET `/api/colleges`**: Retrieve all registered colleges.
-
----
-
-## 🧪 Testing
-
-The project includes basic verification and test suites.
-
-- **App Verification**: `python verify_app.py` (Checks basic route integrity)
-- **Test Suite**: `python test_suite.py` (Runs automated unit/functional tests)
-
----
-
-## 🎨 Design System
-
-- **Primary**: Neon Cyan (`#00f3ff`)
-- **Secondary**: Neon Purple (`#bc13fe`)
-- **Background**: Deep Space Black (`#030305`)
-- **Glassmorphism**: 10px Blur with semi-transparent borders.
-
----
-
-## 🔮 Roadmap
-
-- [ ] Transition from rule-based to Scikit-learn Decision Tree model.
-- [ ] Implement Job Opportunity suggestions based on recommendations.
-- [ ] Add real-time notifications for career events.
-- [ ] Integrate with LinkedIn/Indeed APIs for live job data.
-
----
-
-© 2025 UnniMaya - Towards the Future of Careers.
+© 2026 FutureFit - Architecting the Future of Workforce.
