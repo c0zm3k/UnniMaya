@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
-from extensions import db
-from models import User, Course, College, Job, Internship
-from forms import CourseForm, CollegeForm, JobForm, InternshipForm
+from .extensions import db
+from .models import User, Course, College, Job, Internship
+from .forms import CourseForm, CollegeForm, JobForm, InternshipForm
 from flask_login import login_required, current_user
 
 admin_bp = Blueprint('admin_bp', __name__)

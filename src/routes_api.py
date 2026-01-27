@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, abort
-from models import Course, College
+from .models import Course, College
 import os
 
 api_bp = Blueprint('api_bp', __name__)

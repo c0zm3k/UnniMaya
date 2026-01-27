@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
-from extensions import db, bcrypt
-from forms import RegistrationForm, LoginForm
-from models import User
+from .extensions import db, bcrypt
+from .forms import RegistrationForm, LoginForm
+from .models import User
 from flask_login import login_user, current_user, logout_user, login_required
 
 # Note: We are using a simple structure, so we might not use Blueprint if we import directly.
