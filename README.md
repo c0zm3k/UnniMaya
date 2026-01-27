@@ -10,9 +10,9 @@
 
 FutureFit utilizes a bespoke **Neumorphic (Soft UI)** design system, creating a tactile and immersive digital experience.
 
-| Landing Page | Recommendation Engine |
+| Landing Page | Mobile Navigation |
 | --- | --- |
-| ![Landing Page](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769499106629.png) | *Dynamic results with Work-Mode tracking* |
+| ![Landing Page](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769502549678.png) | ![Mobile Menu](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769501740936.png) |
 
 ---
 
