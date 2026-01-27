@@ -12,11 +12,11 @@ FutureFit utilizes a bespoke **Neumorphic (Soft UI)** design system, creating a 
 
 | Landing Page | Login Page |
 | --- | --- |
-| ![Landing Page](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769503286741.png) | ![Login Page](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769503306807.png) |
+| ![Landing Page](assets/screenshots/landing-page.png) | ![Login Page](assets/screenshots/login-page.png) |
 
 | Admin Dashboard | User Dashboard |
 | --- | --- |
-| ![Admin Dashboard](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769503342881.png) | ![User Dashboard](file:///C:/Users/LENOVO/.gemini/antigravity/brain/8e19e96a-bac2-4052-b23a-fb209505860c/uploaded_media_1769503386456.png) |
+| ![Admin Dashboard](assets/screenshots/admin-dashboard.png) | ![User Dashboard](assets/screenshots/user-dashboard.png) |
 
 ---
 

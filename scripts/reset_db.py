@@ -1,5 +1,6 @@
+import os
 import sys
-sys.path.insert(0, '..')
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
 from src.extensions import db, bcrypt
 from src.models import User, Course, Job, Internship, College
@@ -53,10 +54,14 @@ def reset_database():
             db.session.add(student)
 
         # Lists for random generation
-        locations = ['California', 'New York', 'London', 'Berlin', 'Tokyo', 'Singapore', 'Mumbai', 'Bangalore', 'Sydney', 'Toronto']
+        locations = ['Bangalore', 'Pune', 'Mumbai', 'Delhi', 'Hyderabad', 'Chennai', 'Kolkata']
         college_prefixes = ['Elite', 'Global', 'Future', 'Tech', 'Imperial', 'Heritage', 'Universal', 'Modern', 'Pioneer', 'Horizon']
         college_types = ['Institute', 'University', 'Academy', 'College', 'Polytechnic']
+        inst_types = ['Government', 'Private', 'Deemed']
+        facilities_list = ['Hostel', 'WiFi', 'Placement Cell', 'Sports', 'Digital Lab', 'Library']
         
+        course_streams = ['Engineering', 'Medical', 'Arts', 'Commerce', 'Law', 'Design']
+        course_modes = ['Full-time', 'Online', 'Part-time']
         course_titles = {
             'UG': ['Computer Science', 'Data Analytics', 'Web Development', 'Digital Marketing', 'Business Management', 'Mechanical Engineering', 'Cloud Computing', 'UI/UX Design'],
             'PG': ['Artificial Intelligence', 'Cybersecurity', 'Financial Technology', 'Strategic Management', 'Quantum Computing', 'Big Data Engineering'],
@@ -66,6 +71,8 @@ def reset_database():
         job_roles_pool = ['Software Engineer', 'Data Analyst', 'Product Manager', 'UX Designer', 'Security Specialist', 'Cloud Architect', 'Marketing Lead', 'DevOps Engineer']
         company_names = ['TechNova', 'InnoSoft', 'AlphaStream', 'CloudBase', 'LogicX', 'DataCorp', 'NetSpeed', 'BluePrint']
         work_modes = ['Onsite', 'Hybrid', 'WFH']
+        exp_levels = ['Fresher', 'Junior', 'Mid']
+        role_types = ['Full-Time', 'Contract', 'Internship']
 
         all_colleges = []
         all_courses = []
@@ -78,7 +85,7 @@ def reset_database():
             c_loc = random.choice(locations)
             
             selected_courses_for_college = []
-            for _ in range(random.randint(20, 25)):
+            for _ in range(random.randint(15, 20)):
                 level = random.choice(['Diploma', 'UG', 'PG'])
                 title = random.choice(course_titles[level])
                 full_title = f"{title} ({level})"
@@ -87,25 +94,31 @@ def reset_database():
                     title=full_title,
                     description=f"A specialized {level} program in {title} at {c_name}.",
                     skills_required=f"Skill-{random.randint(1,10)}, Skill-{random.randint(11,20)}",
-                    level=level
+                    level=level,
+                    stream=random.choice(course_streams),
+                    duration=f"{random.randint(2, 4)} Years",
+                    mode=random.choice(course_modes)
                 )
                 all_courses.append(course)
                 selected_courses_for_college.append(full_title)
                 
-                # Add 10 Jobs for this course
-                for _ in range(10):
+                # Add 5 Jobs for this course
+                for _ in range(5):
                     job = Job(
                         title=f"{random.choice(job_roles_pool)} - {title}",
                         company=random.choice(company_names),
                         description=f"Exciting career opportunity in {title} at {random.choice(company_names)}.",
                         skills_required="Technical Skills, Problem Solving",
                         qualification_required=level,
-                        work_mode=random.choice(work_modes)
+                        work_mode=random.choice(work_modes),
+                        role_type=random.choice(role_types),
+                        experience_level=random.choice(exp_levels),
+                        salary_range=f"{random.randint(3, 15)} LPA"
                     )
                     all_jobs.append(job)
 
-                # Add 10 Internships for this course
-                for _ in range(10):
+                # Add 5 Internships for this course
+                for _ in range(5):
                     intern = Internship(
                         title=f"{random.choice(job_roles_pool)} Intern ({title})",
                         company=random.choice(company_names),
@@ -113,7 +126,9 @@ def reset_database():
                         skills_required="Fast Learner, Basic Tech Knowledge",
                         duration=f"{random.randint(3, 6)} Months",
                         qualification_required=level,
-                        work_mode=random.choice(work_modes)
+                        work_mode=random.choice(work_modes),
+                        experience_level='Fresher',
+                        stipend=f"{random.randint(5, 25)}k"
                     )
                     all_internships.append(intern)
 
@@ -122,7 +137,10 @@ def reset_database():
                 location=c_loc,
                 affiliates=", ".join(list(set(selected_courses_for_college))),
                 cutoff_score=random.randint(70, 95),
-                fees=random.randint(10000, 80000)
+                fees=random.randint(50000, 800000),
+                institute_type=random.choice(inst_types),
+                ranking=random.randint(1, 200),
+                facilities=", ".join(random.sample(facilities_list, k=random.randint(2, 4)))
             )
             all_colleges.append(college)
 

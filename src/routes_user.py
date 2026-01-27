@@ -76,3 +76,22 @@ def recommend():
                                suggested_courses=suggested_courses,
                                qualification=current_user.qualification)
     return render_template('recommendation_form.html', title='Get Recommendations', form=form)
+@main.route("/college/<int:college_id>")
+def college_details(college_id):
+    college = College.query.get_or_404(college_id)
+    # Find related courses by searching if their titles are in the affiliates string
+    affiliate_courses = []
+    if college.affiliates:
+        # Simple search for now: check which courses have titles that exist in the affiliates string
+        # Alternatively, find all courses and filter locally if affiliates is just a long description
+        all_courses = Course.query.all()
+        affiliate_courses = [c for c in all_courses if c.title.lower() in college.affiliates.lower()]
+    
+    return render_template('college_detail.html', college=college, courses=affiliate_courses)
+
+@main.route("/course/<int:course_id>")
+def course_details(course_id):
+    course = Course.query.get_or_404(course_id)
+    # Find colleges that offer this course by searching their affiliates field
+    related_colleges = College.query.filter(College.affiliates.contains(course.title)).all()
+    return render_template('course_detail.html', course=course, colleges=related_colleges)

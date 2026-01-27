@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="max-w-6xl mx-auto mt-12 px-4">
+    <!-- Breadcrumb -->
+    <div class="mb-10">
+        <a href="{{ url_for('main.index') }}"
+            class="nm-btn rounded-xl py-2 px-6 text-sm font-bold flex items-center gap-2 w-fit">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+    </div>
+
+    <!-- Header Section -->
+    <div class="nm-flat p-12 rounded-3xl mb-16 relative overflow-hidden">
+        <div class="relative z-10">
+            <h1 class="font-orbitron text-4xl md:text-6xl font-bold text-nm-accent mb-6 tracking-tighter">{{
+                college.name }}</h1>
+            <div class="flex flex-wrap items-center gap-6 text-nm-text opacity-60 font-semibold mb-8">
+                <span class="flex items-center gap-2">
+                    <i class="bi bi-geo-alt-fill text-nm-accent"></i> {{ college.location }}
+                </span>
+                <span class="flex items-center gap-2">
+                    <i class="bi bi-shield-check text-nm-accent"></i> Verified Institution
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <div class="nm-inset p-8 rounded-2xl text-center">
+                    <span class="block text-xs font-bold uppercase tracking-widest opacity-40 mb-2">Annual
+                        Tuition</span>
+                    <span class="text-3xl font-bold text-nm-text">INR {{ college.fees }}</span>
+                </div>
+                <div class="nm-inset p-8 rounded-2xl text-center">
+                    <span class="block text-xs font-bold uppercase tracking-widest opacity-40 mb-2">Admission
+                        Cutoff</span>
+                    <span class="text-3xl font-bold text-nm-text">{{ college.cutoff_score }}%</span>
+                </div>
+                <div class="nm-inset p-8 rounded-2xl text-center">
+                    <span class="block text-xs font-bold uppercase tracking-widest opacity-40 mb-2">Global
+                        Ranking</span>
+                    <span class="text-3xl font-bold text-nm-text">#{{ (range(1, 500) | random) }}</span>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative element -->
+        <i
+            class="bi bi-building absolute -right-20 -bottom-20 text-[300px] opacity-[0.03] text-nm-accent rotate-12"></i>
+    </div>
+
+    <!-- Courses Offered -->
+    <div class="mb-20">
+        <h2 class="font-orbitron text-3xl font-bold mb-12 text-center text-nm-text uppercase tracking-widest">Available
+            Programs</h2>
+        {% if courses %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {% for course in courses %}
+            <a href="{{ url_for('main.course_details', course_id=course.id) }}"
+                class="nm-flat p-8 flex flex-col h-full transform transition-all hover:-translate-y-2 rounded-3xl group">
+                <h5
+                    class="font-orbitron text-xl font-bold text-nm-primary mb-4 group-hover:text-nm-accent transition-colors">
+                    {{ course.title }}</h5>
+                <p class="text-sm opacity-70 mb-6 flex-grow leading-relaxed">{{ course.description[:120] }}...</p>
+                <div class="pt-4 border-t border-nm-primary border-opacity-10">
+                    <span class="text-xs font-bold uppercase tracking-wider opacity-40 block mb-2">Academic Level</span>
+                    <p class="text-xs font-semibold text-nm-text">{{ course.level }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="nm-inset p-16 rounded-3xl text-center">
+            <p class="opacity-40 italic">We are currently cataloging the detailed syllabus for this institution's
+                programs. Check back soon for the full curriculum.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
