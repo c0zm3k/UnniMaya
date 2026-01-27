@@ -16,7 +16,7 @@ def dashboard():
     colleges_count = College.query.count()
     jobs_count = Job.query.count()
     internships_count = Internship.query.count()
-    return render_template('dashboard_admin.html', title='Admin Dashboard', 
+    return render_template('admin/dashboard.html', title='Admin Dashboard', 
                            users_count=users_count, courses_count=courses_count, 
                            colleges_count=colleges_count, jobs_count=jobs_count, 
                            internships_count=internships_count)
@@ -34,7 +34,7 @@ def new_course():
         db.session.commit()
         flash('Course has been created!', 'success')
         return redirect(url_for('admin_bp.dashboard'))
-    return render_template('create_course.html', title='New Course', form=form, legend='New Course')
+    return render_template('admin/create_course.html', title='New Course', form=form, legend='New Course')
 
 @admin_bp.route("/admin/job/new", methods=['GET', 'POST'])
 @login_required
@@ -50,7 +50,7 @@ def new_job():
         db.session.commit()
         flash('Job has been posted!', 'success')
         return redirect(url_for('admin_bp.dashboard'))
-    return render_template('create_course.html', title='New Job', form=form, legend='Post New Job')
+    return render_template('admin/create_course.html', title='New Job', form=form, legend='Post New Job')
 
 @admin_bp.route("/admin/internship/new", methods=['GET', 'POST'])
 @login_required
@@ -66,7 +66,7 @@ def new_internship():
         db.session.commit()
         flash('Internship has been posted!', 'success')
         return redirect(url_for('admin_bp.dashboard'))
-    return render_template('create_course.html', title='New Internship', form=form, legend='Post New Internship')
+    return render_template('admin/create_course.html', title='New Internship', form=form, legend='Post New Internship')
 
 @admin_bp.route("/admin/college/new", methods=['GET', 'POST'])
 @login_required
@@ -81,7 +81,7 @@ def new_college():
         db.session.commit()
         flash('College has been created!', 'success')
         return redirect(url_for('admin_bp.dashboard'))
-    return render_template('create_college.html', title='New College', form=form, legend='New College')
+    return render_template('admin/create_college.html', title='New College', form=form, legend='New College')
 
 @admin_bp.route("/admin/users")
 @login_required
@@ -89,7 +89,7 @@ def view_users():
     if current_user.role != 'admin':
         abort(403)
     users = User.query.all()
-    return render_template('admin_users.html', users=users, title='Manage Users')
+    return render_template('admin/users.html', users=users, title='Manage Users')
 
 @admin_bp.route("/admin/courses")
 @login_required
@@ -97,7 +97,7 @@ def view_courses():
     if current_user.role != 'admin':
         abort(403)
     courses = Course.query.all()
-    return render_template('admin_courses.html', courses=courses, title='Manage Courses')
+    return render_template('admin/courses.html', courses=courses, title='Manage Courses')
 
 @admin_bp.route("/admin/colleges")
 @login_required
@@ -105,4 +105,4 @@ def view_colleges():
     if current_user.role != 'admin':
         abort(403)
     colleges = College.query.all()
-    return render_template('admin_colleges.html', colleges=colleges, title='Manage Colleges')
+    return render_template('admin/colleges.html', colleges=colleges, title='Manage Colleges')

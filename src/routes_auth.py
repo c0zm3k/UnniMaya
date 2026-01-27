@@ -32,7 +32,7 @@ def register():
         
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('auth.login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('auth/register.html', title='Register', form=form)
 
 @auth.route("/admin-register-secure-v1", methods=['GET', 'POST'])
 def register_admin():
@@ -49,7 +49,7 @@ def register_admin():
         db.session.commit()
         flash('Admin Account Created Successfully!', 'success')
         return redirect(url_for('auth.login'))
-    return render_template('register.html', title='Admin Register', form=form)
+    return render_template('auth/register.html', title='Admin Register', form=form)
 
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
@@ -68,7 +68,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.dashboard'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login.html', title='Login', form=form)
+    return render_template('auth/login.html', title='Login', form=form)
 
 @auth.route("/logout")
 def logout():

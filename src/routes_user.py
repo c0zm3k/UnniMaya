@@ -17,7 +17,7 @@ def index():
 def dashboard():
     if current_user.role == 'admin':
         return redirect(url_for('admin_bp.dashboard'))
-    return render_template('dashboard_user.html', title='Dashboard')
+    return render_template('user/dashboard.html', title='Dashboard')
 
 @main.route("/recommend", methods=['GET', 'POST'])
 @login_required
@@ -67,7 +67,7 @@ def recommend():
 
         job_roles = recommendation_engine.get_job_roles(predicted_course)
 
-        return render_template('results.html', title='Recommendations', 
+        return render_template('user/results.html', title='Results', 
                                course=predicted_course, 
                                colleges=recommended_colleges, 
                                job_roles=job_roles,
@@ -75,7 +75,7 @@ def recommend():
                                internships=internships,
                                suggested_courses=suggested_courses,
                                qualification=current_user.qualification)
-    return render_template('recommendation_form.html', title='Get Recommendations', form=form)
+    return render_template('user/form.html', title='Recommendation', form=form)
 @main.route("/college/<int:college_id>")
 def college_details(college_id):
     college = College.query.get_or_404(college_id)

@@ -108,9 +108,13 @@ FutureFit/
 │   ├── css/              # Neumorphic stylesheets
 │   └── js/               # JavaScript files
 ├── templates/            # Jinja2 HTML templates
+│   ├── admin/            # Admin management pages
+│   ├── auth/             # Login & Registration
+│   ├── user/             # User dashboards & results
+│   ├── layout.html       # Base template
+│   └── index.html        # Landing page
 ├── scripts/              # Utility scripts
-│   ├── reset_db.py       # Database seeding
-│   └── check_counts.py   # Data verification
+│   └── reset_db.py       # Database seeding
 ├── tests/                # Test suites
 ├── app.py                # Application entry point
 ├── requirements.txt      # Python dependencies
